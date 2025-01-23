@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="bumperbot"> <!-- This tag here is seen as a container in which we can nest other containers/properties associated with the tag itself  -->
+
+    <link name="base_footprint"/> <!-- Since it's single line and we are not adding anything else, we closed this tag by adding '/'' in the end-->
+
+    <link name="base_link"> <!-- We can attach a mesh (3D Visualization) which means that we can define how this link/component should look like-->
+        <visual> <!-- Mesh -->
+            <origin rpy="0 0 0" xyz="0 0 0"> <!-- That is the origin tag, and this one has two properties the RPY property that represents the orientation of the mesh with respect to the base link and the X, y, z property, which is that represents its position for the moment. Let's set all of these to zero. So let's set the orientation to zero. This corresponds to the roll pitch and yaw angles and this corresponds to its position. So X, Y, and Z, as I mentioned, these values. So the origin tag, which is in the visual tag, represents the position and the orientation of the mesh with respect to the link. It belongs, in this case the base link. For the moment. Let's set all of these to zero and then we are going to visualize this model with these default values that we set and we are going to see, for example, the mesh renders properly. So if the mesh renders in the proper position and orientation and if this is the case, we are not going to change these values here. Otherwise we are going to fine tuning these values in order to display correctly this mesh. -->
+            </origin>
+            <geometry>
+                <mesh filename="package://bumperbot_description/meshes/base_link.STL"/>
+            </geometry>
+        </visual>
+    </link>
+
+    <joint name="base_joint" type="fixed"> <!-- So the type of this connection is fixed. And this basically means that the base link and the base footprint. So the two links that are connected by this joint cannot move with respect to each other. So they are fixed. They are like screwed together. Now, as we said. So this joint connects to link the parent of this connection. So the parent is the link that we call base. Footprint. And the child of this connection is instead the latest link that we created. That is the base link. Furthermore, we can also set the origin of this connection. So basically we can also set the relative position and the orientation of these two links of the base footprint and the base link. So again, we can use the origin tag and this again has the properties RPY. And X, Y, Z. And this time, origin has a different meaning. So this one has a different meaning from this one. Basically, this one that we used within the visual tag of the link indicates the orientation and the position of this mesh with respect to this link. So to the one it belongs to. Instead, this tag origin. So this one here that we inserted within the joint tag indicates the position and the orientation between two reference frames between two links. -->
+        <parent link="base_footprint"/>
+        <child link="base_link"/>
+        <origin rpy="0 0 0" xyz="0 0 0.33"/> <!-- While the base link is oriented the same as the base footprint and intersect the axis of the wheels of the robot. And so, as we can see from this 3D model of the robot, the base link is 33mm height. So as we saw these two links. So the base footprint and the base link are oriented the same. So we can set the channel to zero to indicate that there is no relative orientation among them. And also we saw that the base link is above the base footprint of 33mm. So let's set the X, Y, Z to zero zero and 0.0 33. We can save our model and now we can already visualize our robot model in order to see the two links that we have created and how they are connected to each other.-->
+    </joint>
+
+</robot>
