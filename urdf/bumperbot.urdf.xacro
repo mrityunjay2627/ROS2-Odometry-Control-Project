@@ -17,7 +17,23 @@
     <joint name="base_joint" type="fixed"> <!-- So the type of this connection is fixed. And this basically means that the base link and the base footprint. So the two links that are connected by this joint cannot move with respect to each other. So they are fixed. They are like screwed together. Now, as we said. So this joint connects to link the parent of this connection. So the parent is the link that we call base. Footprint. And the child of this connection is instead the latest link that we created. That is the base link. Furthermore, we can also set the origin of this connection. So basically we can also set the relative position and the orientation of these two links of the base footprint and the base link. So again, we can use the origin tag and this again has the properties RPY. And X, Y, Z. And this time, origin has a different meaning. So this one has a different meaning from this one. Basically, this one that we used within the visual tag of the link indicates the orientation and the position of this mesh with respect to this link. So to the one it belongs to. Instead, this tag origin. So this one here that we inserted within the joint tag indicates the position and the orientation between two reference frames between two links. -->
         <parent link="base_footprint"/>
         <child link="base_link"/>
-        <origin rpy="0 0 0" xyz="0 0 0.33"/> <!-- While the base link is oriented the same as the base footprint and intersect the axis of the wheels of the robot. And so, as we can see from this 3D model of the robot, the base link is 33mm height. So as we saw these two links. So the base footprint and the base link are oriented the same. So we can set the channel to zero to indicate that there is no relative orientation among them. And also we saw that the base link is above the base footprint of 33mm. So let's set the X, Y, Z to zero zero and 0.0 33. We can save our model and now we can already visualize our robot model in order to see the two links that we have created and how they are connected to each other.-->
+        <origin rpy="0 0 0" xyz="0 0 0.033"/> <!-- While the base link is oriented the same as the base footprint and intersect the axis of the wheels of the robot. And so, as we can see from this 3D model of the robot, the base link is 33mm height. So as we saw these two links. So the base footprint and the base link are oriented the same. So we can set the channel to zero to indicate that there is no relative orientation among them. And also we saw that the base link is above the base footprint of 33mm. So let's set the X, Y, Z to zero zero and 0.0 33. We can save our model and now we can already visualize our robot model in order to see the two links that we have created and how they are connected to each other.-->
+    </joint>
+
+    <link name="wheel_right_link">
+        <visual> <!-- Mesh -->
+            <origin rpy="1.57 0 0" xyz="0 0 0"/>             
+            <geometry>
+                <mesh filename="package://bumperbot_description/meshes/wheel_right_link.STL"/>
+            </geometry>
+        </visual>
+    </link>
+
+    <joint name="wheel_right_joint" type="continuous"> <!-- So the type of this connection is continuous. And this basically means that the wheel can rotate around parent link. So the two links that are connected by this joint can move with respect to each other. So they are continuous. So this joint connects to link the parent of this connection. -->
+        <parent link="base_link"/>
+        <child link="wheel_right_link"/>
+        <axis xyz="0 1 0"/> <!-- This means wheel right link can rotate around Y-axis of the base link-->
+        <origin rpy="0 0 0" xyz="0 -0.07 0"/> <!-- Wheel right link is translated by 7 cms along -ve y axis-->
     </joint>
 
 </robot>
